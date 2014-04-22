@@ -1,5 +1,6 @@
-function CardSet(set) 
+function CardSet(set, random) 
 {
+	this.random = random;
 	this.set = set;
 	this.all = [];
 
@@ -32,9 +33,9 @@ CardSet.prototype.getBooster = function()
 	// TODO: foil chances
 
 	// 1/8 odds of pulling a mythic rare
-	if ((Math.random() * 8) < 1)
+	if (random.next(8) < 1)
 	{
-		var cardIndex = Math.floor((Math.random() * this.mythicRares.length));
+		var cardIndex = random.next(this.mythicRares.length);
 		var card = this.mythicRares[cardIndex];
 		if (card == undefined)
 		{
@@ -45,7 +46,7 @@ CardSet.prototype.getBooster = function()
 	// Otherwise, pull one rare
 	else
 	{
-		var cardIndex = Math.floor((Math.random() * this.rares.length));
+		var cardIndex = random.next(this.rares.length);
 		var card = this.rares[cardIndex];
 		if (card == undefined)
 		{
@@ -57,7 +58,7 @@ CardSet.prototype.getBooster = function()
 	// Pull 3 uncommons
 	for (var j = 0; j < 3; j++)
 	{
-		var cardIndex = Math.floor((Math.random() * this.uncommons.length));
+		var cardIndex = random.next(this.uncommons.length);
 		var card = this.uncommons[cardIndex];
 		if (card == undefined)
 		{
@@ -69,7 +70,7 @@ CardSet.prototype.getBooster = function()
 	// Pull 10 commons
 	for (var j = 0; j < 10; j++)
 	{
-		var cardIndex = Math.floor((Math.random() * this.commons.length))
+		var cardIndex = random.next(this.commons.length)
 		var card = this.commons[cardIndex];
 		if (card == undefined)
 		{
@@ -178,6 +179,23 @@ CardSet.prototype.push = function(card)
 	if (card.creature)
 	{
 		this.creatures.push(card);
+
+		var maxCreatureCMC = 0;
+
+		// update the max creature CMC
+		for (var i = 0; i < this.creatures.length; i++)
+		{
+			var creature = this.creatures[i];
+
+			// find the largest CMC
+			if (creature.cmc > maxCreatureCMC)
+			{
+				maxCreatureCMC = creature.cmc;
+			}
+		}
+
+		// update the value
+		this.maxCreatureCMC = maxCreatureCMC;
 	}
 	if (card.sorcery)
 	{

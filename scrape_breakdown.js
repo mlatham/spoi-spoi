@@ -1,4 +1,5 @@
 var cardSets = [];
+var random;
 
 // add spoiler URLs, mythic spoiler set names (for images), and booster count.
 var spoilerUrls = [ 
@@ -10,8 +11,32 @@ var spoilerUrls = [
 	// [ 'http://www.mtgsalvation.com/avacyn-restored-spoiler.html', 'avr' ]
 	];
 
-// begin parsing
-parseCardSet(0);
+// if there is no random number seed, generate one
+var seed = getParameterByName('seed');
+
+if (!seed)
+{
+	// generate a new seed
+	seed = Math.floor(Math.random() * 999999999);
+
+	// navigate to the url with the random number seed
+	window.location.href = (window.location.href +  "?seed=" + seed);
+}
+else
+{
+	// create the random generator
+	random = new SeedRandom(parseInt(seed));
+
+	// begin parsing
+	parseCardSet(0);
+}
+
+function getParameterByName(name)
+{
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
 function parseCardSet(urlIndex)
 {
@@ -43,13 +68,13 @@ function parseCardSet(urlIndex)
 	    	{
 	    		main();
 	    	}
-	    }
-	});
-}
+	    }});
+
+	}
 
 function parseCards(data, set)
 {
-	var cardSet = new CardSet(set);
+	var cardSet = new CardSet(set, random);
 
 	$('.t-spoiler', data).each(function(index) 
 	{
@@ -197,4 +222,19 @@ function main()
 
 	// render the visual table
 	renderVisualTable(pool);
+
+	// print set metrics
+	var maxCreatureCMC = 0;
+
+	for (var i = 0; i < cardSets.length; i++)
+	{
+		var cardSet = cardSets[i];
+
+		if (maxCreatureCMC < cardSet.maxCreatureCMC)
+		{
+			maxCreatureCMC = cardSet.maxCreatureCMC;
+		}
+	}
+
+	// get top play options at each CMC
 }

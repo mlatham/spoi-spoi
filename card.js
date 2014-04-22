@@ -1,29 +1,5 @@
 function Card(name, cost, rarity, types, subTypes, set) 
 {
-	// TODO: these replacements help create a clean set
-	var replacements = [
-		[ 'felhideminotaur.jpg', 'fellhideminotaur.jpg' ],
-		[ 'purphorossemissary.jpg', 'purphorosemissary.jpg' ],
-		[ 'unravelthe%C3%A6ther.jpg', 'unraveltheaether.jpg' ],
-		[ 'http://mythicspoiler.com/ths/cards/forest.jpg', 'http://mythicspoiler.com/ths/cards/forest1.jpg' ],
-		[ 'http://mythicspoiler.com/ths/cards/mountain.jpg', 'http://mythicspoiler.com/ths/cards/mountain1.jpg' ],
-		[ 'http://mythicspoiler.com/ths/cards/swamp.jpg', 'http://mythicspoiler.com/ths/cards/swamp1.jpg' ],
-		[ 'http://mythicspoiler.com/ths/cards/plains.jpg', 'http://mythicspoiler.com/ths/cards/plains1.jpg' ],
-		[ 'http://mythicspoiler.com/ths/cards/island.jpg', 'http://mythicspoiler.com/ths/cards/island1.jpg' ],
-	];
-
-	for (var i = 0; i < replacements.length; i++)
-	{
-		var replacement = replacements[i];
-
-		if (name.indexOf(replacement[0]) >= 0)
-		{
-			name = name.replace(replacement[0], replacement[1]);
-
-			break;
-		}
-	}
-
 	this.name = name;
 
 	this.cost = cost;
@@ -58,7 +34,31 @@ function Card(name, cost, rarity, types, subTypes, set)
 
 	var strippedName = name.replace(/([~!@#$%^&*()_+-=`{}\[\]\|\\:;'<>,.\/? ])+/g, '');
 	this.imageUrl = 'http://mythicspoiler.com/' + set + '/cards/' + strippedName.toLowerCase() + ".jpg";
-	
+
+	// TODO: these replacements help create a clean set of images
+	var replacements = [
+		[ 'felhideminotaur.jpg', 'fellhideminotaur.jpg' ],
+		[ 'purphorossemissary.jpg', 'purphorosemissary.jpg' ],
+		[ 'unravelthe%C3%A6ther.jpg', 'unraveltheaether.jpg' ],
+		[ 'http://mythicspoiler.com/ths/cards/forest.jpg', 'http://mythicspoiler.com/ths/cards/forest1.jpg' ],
+		[ 'http://mythicspoiler.com/ths/cards/mountain.jpg', 'http://mythicspoiler.com/ths/cards/mountain1.jpg' ],
+		[ 'http://mythicspoiler.com/ths/cards/swamp.jpg', 'http://mythicspoiler.com/ths/cards/swamp1.jpg' ],
+		[ 'http://mythicspoiler.com/ths/cards/plains.jpg', 'http://mythicspoiler.com/ths/cards/plains1.jpg' ],
+		[ 'http://mythicspoiler.com/ths/cards/island.jpg', 'http://mythicspoiler.com/ths/cards/island1.jpg' ],
+	];
+
+	for (var i = 0; i < replacements.length; i++)
+	{
+		var replacement = replacements[i];
+
+		if (this.imageUrl.indexOf(replacement[0]) >= 0)
+		{
+			this.imageUrl = this.imageUrl.replace(replacement[0], replacement[1]);
+
+			break;
+		}
+	}
+
 	// parse rarity
 	if (rarity.indexOf('uncommon') >= 0)
 	{
