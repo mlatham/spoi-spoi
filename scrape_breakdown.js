@@ -43,6 +43,8 @@ function parseCardSet(urlIndex)
 	var url = spoilerUrls[urlIndex][0];
 	var set = spoilerUrls[urlIndex][1];
 
+	jQuery.support.cors = true;
+
 	$.ajax({
 	    dataType: 'html',
 	    url: url,
