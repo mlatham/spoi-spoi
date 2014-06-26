@@ -3,12 +3,13 @@ var random;
 
 // add spoiler URLs, mythic spoiler set names (for images), and booster count.
 var spoilerUrls = [ 
-	[ 'http://www.corsproxy.com/www.mtgsalvation.com/spoilers/138-journey-into-nyx', 	"nyx", 2 ],
-	[ 'http://www.corsproxy.com/www.mtgsalvation.com/spoilers/134-born-of-the-gods', 	'bng', 1 ],
-	[ 'http://www.corsproxy.com/www.mtgsalvation.com/spoilers/132-theros', 				'ths', 2 ]
-	// [ 'http://www.mtgsalvation.com/innistrad-spoiler.html', 'isd' ],
-	// [ 'http://www.mtgsalvation.com/dark-ascension-spoiler.html', 'dka' ],
-	// [ 'http://www.mtgsalvation.com/avacyn-restored-spoiler.html', 'avr' ]
+	[ 'http://www.mtgsalvation.com/spoilers/141-magic-2015', "m15", 6]
+	// [ 'http://www.corsproxy.com/www.mtgsalvation.com/spoilers/138-journey-into-nyx', 	"nyx", 2 ],
+	// [ 'http://www.corsproxy.com/www.mtgsalvation.com/spoilers/134-born-of-the-gods', 	'bng', 1 ],
+	// [ 'http://www.corsproxy.com/www.mtgsalvation.com/spoilers/132-theros', 				'ths', 2 ]
+	// [ 'http://www.corsproxy.com/www.mtgsalvation.com/innistrad-spoiler.html', 'isd' ],
+	// [ 'http://www.corsproxy.com/www.mtgsalvation.com/dark-ascension-spoiler.html', 'dka' ],
+	// [ 'http://www.corsproxy.com/www.mtgsalvation.com/avacyn-restored-spoiler.html', 'avr' ]
 	];
 
 // if there is no random number seed, generate one
